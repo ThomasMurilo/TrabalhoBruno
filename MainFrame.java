@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,7 +22,7 @@ public class MainFrame extends JFrame {
 
         add(mainPanel);
 
-        setSize(450, 350);
+        setSize(700, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
