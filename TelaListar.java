@@ -1,5 +1,5 @@
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class TelaListar extends JPanel {
 
@@ -16,5 +16,9 @@ public class TelaListar extends JPanel {
 
         add(new JLabel("LISTA DE PRODUTOS", SwingConstants.CENTER), BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
+
+        JButton btnVoltar = new JButton("Voltar");
+
+        add(btnVoltar);
     }
 }
