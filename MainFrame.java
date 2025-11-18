@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
 
         add(mainPanel);
 
-        setSize(700, 500);
+        setSize(1300, 1000);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
