@@ -13,7 +13,6 @@ public class MainFrame extends JFrame {
         card = new CardLayout();
         mainPanel = new JPanel(card);
 
-        // ----- TELAS -----
         mainPanel.add(new TelaMenu(this), "menu");
         mainPanel.add(new TelaCadastro(this), "cadastro");
         mainPanel.add(new TelaListar(), "listar");
