@@ -15,8 +15,15 @@ public class PanelHandler implements ActionListener {
 		JPanel panelButtons = new JPanel();
 		panelButtons.setLayout(new GridLayout(5, 1));
 
+
+
 		for (int i = 0; i < 5; i++) {
 			panels[i] = new JPanel();
+			mainPanel.add(new TelaMenu(this), "menu");
+      mainPanel.add(new TelaCadastro(this), "cadastro");
+      mainPanel.add(new TelaListar(), "listar");
+      mainPanel.add(new TelaAtualizar(this), "atualizar");
+      mainPanel.add(new TelaExcluir(this), "excluir");
 			JLabel label = new JLabel("Painel " + i);
 			panels[i].add(label);
 
