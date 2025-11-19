@@ -4,6 +4,79 @@ import javax.swing.*;
 public class TelaCadastro extends JPanel {
     public TelaCadastro() {
         setLayout(new BorderLayout());
-        add(new JLabel("Tela de Cadastro", SwingConstants.CENTER), BorderLayout.CENTER);
+        // Fundo mais claro e bonito
+        setBackground(new Color(245, 245, 245));
+        setLayout(new BorderLayout());
+
+        // Painel central com margem e layout organizado
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBackground(new Color(245, 245, 245));
+        formPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80)); // MARGEM
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(12, 12, 12, 12); // espaço entre elementos
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
+
+        Font fonte = new Font("Segoe UI", Font.PLAIN, 18);
+
+        // Campos maiores
+        
+        JTextField txtNome = new JTextField(20);
+        JTextField txtDescricao = new JTextField(20);
+        JTextField txtPreco = new JTextField(20);
+        JTextField txtQuantidade = new JTextField(20);
+
+        // Labels mais bonitos
+        
+        JLabel lblNome = new JLabel("Nome:");
+        JLabel lblDescricao = new JLabel("Descrição:");
+        JLabel lblPreco = new JLabel("Preço:");
+        JLabel lblQuantidade = new JLabel("Quantidade:");
+        
+        lblNome.setFont(fonte);
+        lblDescricao.setFont(fonte);
+        lblPreco.setFont(fonte);
+        lblQuantidade.setFont(fonte);
+
+        txtNome.setFont(fonte);
+        txtDescricao.setFont(fonte);
+        txtPreco.setFont(fonte);
+        txtQuantidade.setFont(fonte);
+
+        // --- Adiciona os componentes ao GridBag ---
+
+        
+
+        gbc.gridx = 0; gbc.gridy = 1; formPanel.add(lblNome, gbc);
+        gbc.gridx = 1; formPanel.add(txtNome, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 2; formPanel.add(lblDescricao, gbc);
+        gbc.gridx = 1; formPanel.add(txtDescricao, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 3; formPanel.add(lblPreco, gbc);
+        gbc.gridx = 1; formPanel.add(txtPreco, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 4; formPanel.add(lblQuantidade, gbc);
+        gbc.gridx = 1; formPanel.add(txtQuantidade, gbc);
+
+        // Painel de botões
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
+        buttonPanel.setBackground(new Color(235, 235, 235));
+
+        JButton btnSalvar = new JButton("Salvar");
+        
+
+        btnSalvar.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        
+
+        btnSalvar.setPreferredSize(new Dimension(180, 45));
+        
+
+        buttonPanel.add(btnSalvar);
+        
+
+        add(formPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 }
