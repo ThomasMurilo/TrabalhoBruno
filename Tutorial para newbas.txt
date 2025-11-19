@@ -1,4 +1,3 @@
-
 Tutorial para newbas:
 
 Antes de tudo, verifique com os coleguinhas se eles mandaram algum commit, ou, de o comando |git status| e ele vai te mostrar se vc está algum commit atrasado.
