@@ -9,9 +9,16 @@ Dê o comando | git checkout -b nome_da_sua_branch |  para criar sua nova branch
 
 Dê o comando  | git branch -M nome_da_sua_branch | para registra-la no git
 
-Para voltar para a main dê o comando | git checkout main | e vice versa, mudando o nome final "main" pelo de sua branch
+Daqui para cima só se faz uma vez 
+
+
+
+
+
 
 Envio dos arquivos para o git:
+
+Para voltar para a main dê o comando | git checkout main | e vice versa, mudando o nome final "main" pelo de sua branch
 
 Para mandar suas modificações pro git, dê um |git add .|, seguido de um | git commit -m "Descrição do q vc mexeu" |
 
