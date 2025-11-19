@@ -14,6 +14,5 @@ public class TelaListar extends JPanel {
         add(new JLabel("LISTA DE PRODUTOS", SwingConstants.CENTER), BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
 
-      
     }
 }

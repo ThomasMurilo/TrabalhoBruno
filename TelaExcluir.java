@@ -27,7 +27,8 @@ public class TelaExcluir extends JPanel {
         campoCodigo.setFont(fonte);
 
         // Adicionando ao GridBag
-        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         formPanel.add(lblCodigo, gbc);
 
         gbc.gridx = 1;
@@ -38,18 +39,12 @@ public class TelaExcluir extends JPanel {
         buttonPanel.setBackground(new Color(235, 235, 235));
 
         JButton btnExcluir = new JButton("Excluir");
-        
 
         btnExcluir.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        
 
         btnExcluir.setPreferredSize(new Dimension(180, 45));
-        
-
-        
 
         buttonPanel.add(btnExcluir);
-        
 
         // Montagem final
         add(formPanel, BorderLayout.CENTER);

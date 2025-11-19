@@ -21,19 +21,19 @@ public class TelaCadastro extends JPanel {
         Font fonte = new Font("Segoe UI", Font.PLAIN, 18);
 
         // Campos maiores
-        
+
         JTextField txtNome = new JTextField(20);
         JTextField txtDescricao = new JTextField(20);
         JTextField txtPreco = new JTextField(20);
         JTextField txtQuantidade = new JTextField(20);
 
         // Labels mais bonitos
-        
+
         JLabel lblNome = new JLabel("Nome:");
         JLabel lblDescricao = new JLabel("Descrição:");
         JLabel lblPreco = new JLabel("Preço:");
         JLabel lblQuantidade = new JLabel("Quantidade:");
-        
+
         lblNome.setFont(fonte);
         lblDescricao.setFont(fonte);
         lblPreco.setFont(fonte);
@@ -46,35 +46,41 @@ public class TelaCadastro extends JPanel {
 
         // --- Adiciona os componentes ao GridBag ---
 
-        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formPanel.add(lblNome, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtNome, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 1; formPanel.add(lblNome, gbc);
-        gbc.gridx = 1; formPanel.add(txtNome, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formPanel.add(lblDescricao, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtDescricao, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 2; formPanel.add(lblDescricao, gbc);
-        gbc.gridx = 1; formPanel.add(txtDescricao, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formPanel.add(lblPreco, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtPreco, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 3; formPanel.add(lblPreco, gbc);
-        gbc.gridx = 1; formPanel.add(txtPreco, gbc);
-
-        gbc.gridx = 0; gbc.gridy = 4; formPanel.add(lblQuantidade, gbc);
-        gbc.gridx = 1; formPanel.add(txtQuantidade, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        formPanel.add(lblQuantidade, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtQuantidade, gbc);
 
         // Painel de botões
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
         buttonPanel.setBackground(new Color(235, 235, 235));
 
         JButton btnSalvar = new JButton("Salvar");
-        
 
         btnSalvar.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        
 
         btnSalvar.setPreferredSize(new Dimension(180, 45));
-        
 
         buttonPanel.add(btnSalvar);
-        
 
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);

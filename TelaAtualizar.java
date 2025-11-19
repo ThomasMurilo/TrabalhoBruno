@@ -4,7 +4,7 @@ import javax.swing.*;
 public class TelaAtualizar extends JPanel {
     public TelaAtualizar() {
         setLayout(new BorderLayout());
-        
+
         // Fundo suave
         setBackground(new Color(245, 245, 245));
         setLayout(new BorderLayout());
@@ -46,41 +46,51 @@ public class TelaAtualizar extends JPanel {
         lblDescricao.setFont(fonte);
         lblPreco.setFont(fonte);
         lblQuantidade.setFont(fonte);
-// Adicionando ao GridBag
-        gbc.gridx = 0; gbc.gridy = 0; formPanel.add(lblCodigo, gbc);
-        gbc.gridx = 1; formPanel.add(txtCodigo, gbc);
+        // Adicionando ao GridBag
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formPanel.add(lblCodigo, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtCodigo, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 1; formPanel.add(lblNome, gbc);
-        gbc.gridx = 1; formPanel.add(txtNome, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formPanel.add(lblNome, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtNome, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 2; formPanel.add(lblDescricao, gbc);
-        gbc.gridx = 1; formPanel.add(txtDescricao, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formPanel.add(lblDescricao, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtDescricao, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 3; formPanel.add(lblPreco, gbc);
-        gbc.gridx = 1; formPanel.add(txtPreco, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        formPanel.add(lblPreco, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtPreco, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 4; formPanel.add(lblQuantidade, gbc);
-        gbc.gridx = 1; formPanel.add(txtQuantidade, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        formPanel.add(lblQuantidade, gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtQuantidade, gbc);
 
         // Painel de botões
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
         buttonPanel.setBackground(new Color(235, 235, 235));
 
         JButton btnAtualizar = new JButton("Atualizar");
-        
 
         btnAtualizar.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        
+
         btnAtualizar.setPreferredSize(new Dimension(180, 45));
-        
 
         buttonPanel.add(btnAtualizar);
-        
+
         // Montagem final
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
     }
 }
-
-
-
