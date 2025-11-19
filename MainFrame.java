@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
         // ----- TELAS -----
         mainPanel.add(new TelaMenu(this), "menu");
         mainPanel.add(new TelaCadastro(this), "cadastro");
-        mainPanel.add(new TelaListar(), "listar");
+        mainPanel.add(new TelaListar(this), "listar");
         mainPanel.add(new TelaAtualizar(this), "atualizar");
         mainPanel.add(new TelaExcluir(this), "excluir");
 
@@ -35,4 +35,5 @@ public class MainFrame extends JFrame {
     public static void main(String[] args) {
         new MainFrame();
     }
+    
 }

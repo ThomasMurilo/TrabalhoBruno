@@ -3,12 +3,15 @@ import javax.swing.*;
 
 public class TelaListar extends JPanel {
 
-    public TelaListar() {
+    private MainFrame mainFrame;
+
+    public TelaListar(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
+
         setLayout(new BorderLayout());
 
         String[] colunas = { "Código", "Nome", "Descrição", "Preço", "Quantidade" };
 
-        // Dados vazios (depois podemos conectar ao DAO)
         String[][] dados = {};
 
         JTable tabela = new JTable(dados, colunas);
@@ -19,6 +22,9 @@ public class TelaListar extends JPanel {
 
         JButton btnVoltar = new JButton("Voltar");
 
-        add(btnVoltar);
+        btnVoltar.addActionListener(e -> mainFrame.mostrarTela("menu"));
+
+        add(btnVoltar, BorderLayout.SOUTH);
     }
 }
+
