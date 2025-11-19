@@ -3,10 +3,21 @@ Tutorial para newbas:
 Antes de tudo, verifique com os cologuinhas se eles mandaram algum commit, ou, de o comando |git status| e ele vai te mostrar se vc está algum commit atrasado.
 Caso isso aconteça, dê um git pull e siga as instruçoes do powershell para resolver os erros(se der algum)
 
+Trabalho remoto(cada um na sua branch):
+
+Dê o comando | git checkout -b nome_da_sua_branch |  para criar sua nova branch
+
+Para voltar para a main dê o comando | git checkout main | e vice versa, mudando o nome final "main" pelo de sua branch
+
+Envio dos arquivos para o git:
+
 Para mandar suas modificações pro git, dê um |git add .|, seguido de um | git commit -m "Descrição do q vc mexeu" |
+Depois de um git push SUA_BRANCH main 
+
 Depois disso, dê um | git push | , ou | git push origin main | (caso de erro de não reconhecer sua branch)
 
 PS: O comando | git status | é mt forte pra resolver erros e saber o q está acontecendo com o git
 
 PS2: A extensão GitLens -- Git supercharged te mostra quem deu qual commit, te da o link do commit para o github e da mais detalhes, caso precise pedir para alguem o que a pessoa fez 
 (essa extensão vai ter q estar presente no pc q for usado para a apresentação pro professor, caso ele pergunte quem fez o q a gente saber responder)
+
