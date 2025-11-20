@@ -1,17 +1,18 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 public class TelaAtualizar extends JPanel {
     public TelaAtualizar() {
         setLayout(new BorderLayout());
 
-        // Fundo suave
-        setBackground(new Color(245, 245, 245));
-        setLayout(new BorderLayout());
+        // Fundo cinza suave (mesmo padrão das outras telas)
+        Color fundo = new Color(133, 138, 142);
+        setBackground(fundo);
 
         // Painel central
         JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(new Color(245, 245, 245));
+        formPanel.setBackground(fundo);
         formPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -20,32 +21,36 @@ public class TelaAtualizar extends JPanel {
         gbc.anchor = GridBagConstraints.WEST;
 
         Font fonte = new Font("Segoe UI", Font.PLAIN, 18);
+        Font fonteNegrito = new Font("Segoe UI", Font.BOLD, 18);
 
-        // Campos
+        // Campos com destaque e borda preta
         JTextField txtCodigo = new JTextField(20);
         JTextField txtNome = new JTextField(20);
         JTextField txtDescricao = new JTextField(20);
         JTextField txtPreco = new JTextField(20);
         JTextField txtQuantidade = new JTextField(20);
 
-        txtCodigo.setFont(fonte);
-        txtNome.setFont(fonte);
-        txtDescricao.setFont(fonte);
-        txtPreco.setFont(fonte);
-        txtQuantidade.setFont(fonte);
+        JTextField[] campos = { txtCodigo, txtNome, txtDescricao, txtPreco, txtQuantidade };
 
-        // Labels
+        for (JTextField campo : campos) {
+            campo.setFont(fonte);
+            campo.setBorder(new LineBorder(Color.BLACK, 2));
+        }
+
+        // Labels destacadas
         JLabel lblCodigo = new JLabel("Código do Produto:");
         JLabel lblNome = new JLabel("Novo Nome:");
         JLabel lblDescricao = new JLabel("Nova Descrição:");
         JLabel lblPreco = new JLabel("Novo Preço:");
         JLabel lblQuantidade = new JLabel("Nova Quantidade:");
 
-        lblCodigo.setFont(fonte);
-        lblNome.setFont(fonte);
-        lblDescricao.setFont(fonte);
-        lblPreco.setFont(fonte);
-        lblQuantidade.setFont(fonte);
+        JLabel[] labels = { lblCodigo, lblNome, lblDescricao, lblPreco, lblQuantidade };
+
+        for (JLabel lbl : labels) {
+            lbl.setFont(fonteNegrito);
+            lbl.setForeground(Color.BLACK);
+        }
+
         // Adicionando ao GridBag
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -79,13 +84,18 @@ public class TelaAtualizar extends JPanel {
 
         // Painel de botões
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
-        buttonPanel.setBackground(new Color(235, 235, 235));
+        buttonPanel.setBackground(new Color(120, 125, 128));
 
         JButton btnAtualizar = new JButton("Atualizar");
 
         btnAtualizar.setFont(new Font("Segoe UI", Font.BOLD, 18));
-
         btnAtualizar.setPreferredSize(new Dimension(180, 45));
+
+        // cor do botão (#2C82B5)
+        btnAtualizar.setBackground(new Color(44, 130, 181)); // fundo azul
+        btnAtualizar.setForeground(Color.WHITE); // texto branco
+
+        btnAtualizar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // borda preta de 2px
 
         buttonPanel.add(btnAtualizar);
 

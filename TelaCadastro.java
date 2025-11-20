@@ -5,12 +5,12 @@ public class TelaCadastro extends JPanel {
     public TelaCadastro() {
         setLayout(new BorderLayout());
         // Fundo mais claro e bonito
-        setBackground(new Color(245, 245, 245));
+        setBackground(new Color(133, 138, 142));
         setLayout(new BorderLayout());
 
         // Painel central com margem e layout organizado
         JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(new Color(245, 245, 245));
+        formPanel.setBackground(new Color(133, 138, 142));
         formPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80)); // MARGEM
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -72,7 +72,7 @@ public class TelaCadastro extends JPanel {
 
         // Painel de botões
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
-        buttonPanel.setBackground(new Color(235, 235, 235));
+        buttonPanel.setBackground(new Color(133, 138, 142));
 
         JButton btnSalvar = new JButton("Salvar");
 
@@ -80,9 +80,35 @@ public class TelaCadastro extends JPanel {
 
         btnSalvar.setPreferredSize(new Dimension(180, 45));
 
+        btnSalvar.setBackground(new Color(44, 130, 181));
+        btnSalvar.setForeground(Color.WHITE);
+
+        // borda preta de 2px
+        btnSalvar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
         buttonPanel.add(btnSalvar);
 
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
+
+        Font fonteLabel = new Font("Segoe UI", Font.BOLD, 20);
+        Color corTexto = Color.WHITE; // destaque no fundo cinza
+
+        lblNome.setFont(fonteLabel);
+        lblDescricao.setFont(fonteLabel);
+        lblPreco.setFont(fonteLabel);
+        lblQuantidade.setFont(fonteLabel);
+
+        lblNome.setForeground(corTexto);
+        lblDescricao.setForeground(corTexto);
+        lblPreco.setForeground(corTexto);
+        lblQuantidade.setForeground(corTexto);
+
+        // Bordas pretas nos campos
+        txtNome.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        txtDescricao.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        txtPreco.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        txtQuantidade.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
     }
 }
