@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class MainFrame extends JFrame implements ActionListener {
 
-    JButton btnMenu, btnCadastro, btnListar, btnAtualizar, btnExcluir;
+    JButton btnMenu, btnCadastro, btnListar;
     JPanel[] telas = new JPanel[5]; // 0=menu, 1=cadastro, 2=listar, 3=atualizar, 4=excluir
 
     public MainFrame() {
@@ -22,7 +22,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // ----- Painel lateral com botões -----
         // ----- Painel lateral com botões -----
         JPanel painelBotoes = new JPanel();
-        painelBotoes.setLayout(new GridLayout(5, 1, 0, 10)); // espaçamento entre botões
+        painelBotoes.setLayout(new GridLayout(3, 1, 0, 10)); // espaçamento entre botões (apenas 3 itens agora)
         painelBotoes.setPreferredSize(new Dimension(180, 0)); // largura fixa, altura responsiva
 
         // Borda lateral responsiva
@@ -31,8 +31,7 @@ public class MainFrame extends JFrame implements ActionListener {
         btnMenu = new JButton("Menu");
         btnCadastro = new JButton("Cadastro");
         btnListar = new JButton("Listar");
-        btnAtualizar = new JButton("Atualizar");
-        btnExcluir = new JButton("Excluir");
+        // Não há botões laterais para Atualizar/Excluir — ações via coluna "Ferramentas"
 
         btnMenu.setBackground(new Color(44, 130, 181));
         btnMenu.setForeground(Color.WHITE);
@@ -45,13 +44,9 @@ public class MainFrame extends JFrame implements ActionListener {
         btnListar.setBackground(new Color(44, 130, 181));
         btnListar.setForeground(Color.WHITE);
 
-        btnAtualizar.setBackground(new Color(44, 130, 181));
-        btnAtualizar.setForeground(Color.WHITE);
+        // botões Atualizar/Excluir removidos do menu lateral
 
-        btnExcluir.setBackground(new Color(44, 130, 181));
-        btnExcluir.setForeground(Color.WHITE);
-
-        JButton[] botoes = { btnMenu, btnCadastro, btnListar, btnAtualizar, btnExcluir };
+        JButton[] botoes = { btnMenu, btnCadastro, btnListar };
 
         for (JButton b : botoes) {
             b.addActionListener(this);
@@ -85,12 +80,17 @@ public class MainFrame extends JFrame implements ActionListener {
             add(telas[0], BorderLayout.CENTER);
         else if (e.getSource() == btnCadastro)
             add(telas[1], BorderLayout.CENTER);
-        else if (e.getSource() == btnListar)
+        else if (e.getSource() == btnListar) {
+            // antes de mostrar, atualiza os dados da tabela
+            try {
+                if (telas[2] instanceof TelaListar) {
+                    ((TelaListar) telas[2]).atualizarTabela();
+                }
+            } catch (Exception ex) {
+                // ignorar se acontecer algo ao atualizar
+            }
             add(telas[2], BorderLayout.CENTER);
-        else if (e.getSource() == btnAtualizar)
-            add(telas[3], BorderLayout.CENTER);
-        else if (e.getSource() == btnExcluir)
-            add(telas[4], BorderLayout.CENTER);
+        }
 
         // Atualiza layout
         revalidate();
@@ -99,5 +99,38 @@ public class MainFrame extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainFrame());
+    }
+
+    // permite que outras telas peçam atualização da lista
+    public void atualizarLista() {
+        try {
+            if (telas[2] instanceof TelaListar) {
+                ((TelaListar) telas[2]).atualizarTabela();
+            }
+        } catch (Exception ex) {
+            // ignorar
+        }
+    }
+
+    // mostra a tela de atualizar no centro
+    public void mostrarTelaAtualizar() {
+        BorderLayout layout = (BorderLayout) getContentPane().getLayout();
+        Component atual = layout.getLayoutComponent(BorderLayout.CENTER);
+        if (atual != null) remove(atual);
+        add(telas[3], BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    // carrega um produto na TelaAtualizar e a exibe
+    public void abrirTelaAtualizarComProduto(Produto p) {
+        try {
+            if (telas[3] instanceof TelaAtualizar) {
+                ((TelaAtualizar) telas[3]).carregarProduto(p);
+            }
+        } catch (Exception ex) {
+            // ignorar
+        }
+        mostrarTelaAtualizar();
     }
 }

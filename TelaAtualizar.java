@@ -3,6 +3,12 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 public class TelaAtualizar extends JPanel {
+    private JTextField txtCodigo;
+    private JTextField txtNome;
+    private JTextField txtDescricao;
+    private JTextField txtPreco;
+    private JTextField txtQuantidade;
+
     public TelaAtualizar() {
         setLayout(new BorderLayout());
 
@@ -24,11 +30,15 @@ public class TelaAtualizar extends JPanel {
         Font fonteNegrito = new Font("Segoe UI", Font.BOLD, 18);
 
         // Campos com destaque e borda preta
-        JTextField txtCodigo = new JTextField(20);
-        JTextField txtNome = new JTextField(20);
-        JTextField txtDescricao = new JTextField(20);
-        JTextField txtPreco = new JTextField(20);
-        JTextField txtQuantidade = new JTextField(20);
+        txtCodigo = new JTextField(20);
+        // o código do produto não deve ser alterado pelo usuário
+        txtCodigo.setEditable(false);
+        txtCodigo.setBackground(new Color(220, 220, 220));
+        txtCodigo.setToolTipText("Código atribuído automaticamente - não é possível editar");
+        txtNome = new JTextField(20);
+        txtDescricao = new JTextField(20);
+        txtPreco = new JTextField(20);
+        txtQuantidade = new JTextField(20);
 
         JTextField[] campos = { txtCodigo, txtNome, txtDescricao, txtPreco, txtQuantidade };
 
@@ -99,8 +109,90 @@ public class TelaAtualizar extends JPanel {
 
         buttonPanel.add(btnAtualizar);
 
+        // ação do botão Atualizar: busca por código e atualiza os campos informados (sem validar com diálogos)
+        btnAtualizar.addActionListener(e -> {
+            String sCodigo = txtCodigo.getText().trim();
+            String nome = txtNome.getText().trim();
+            String descricao = txtDescricao.getText().trim();
+            String sPreco = txtPreco.getText().trim();
+            String sQtd = txtQuantidade.getText().trim();
+
+            int codigo = -1;
+            try {
+                codigo = Integer.parseInt(sCodigo);
+            } catch (NumberFormatException ex) {
+                // sem diálogo: código inválido -> não prossegue
+                return;
+            }
+
+            double preco = 0.0;
+            int quantidade = 0;
+            if (!sPreco.isEmpty()) {
+                String precoStr = sPreco.replace("R$", "").replace("r$", "").replaceAll("\\s+", "");
+                try {
+                    preco = Double.parseDouble(precoStr.replace(',', '.'));
+                } catch (NumberFormatException ex2) {
+                    try {
+                        String alt = precoStr.replace(".", "").replace(',', '.');
+                        preco = Double.parseDouble(alt);
+                    } catch (NumberFormatException ex3) {
+                        preco = 0.0;
+                    }
+                }
+            }
+
+            if (!sQtd.isEmpty()) {
+                try {
+                    quantidade = Integer.parseInt(sQtd);
+                } catch (NumberFormatException ex) {
+                    quantidade = 0;
+                }
+            }
+
+            Produto existente = Produto.buscarPorId(codigo);
+            if (existente == null) {
+                // sem diálogo: produto não encontrado -> não prossegue
+                return;
+            }
+
+            // se algum campo estiver vazio, manter valor anterior
+            String novoNome = nome.isEmpty() ? existente.getNome() : nome;
+            String novaDescricao = descricao.isEmpty() ? existente.getDescricao() : descricao;
+            double novoPreco = sPreco.isEmpty() ? existente.getPreco() : preco;
+            int novaQuantidade = sQtd.isEmpty() ? existente.getQuantidade() : quantidade;
+
+            boolean ok = Produto.atualizar(codigo, novoNome, novaDescricao, novoPreco, novaQuantidade);
+            if (ok) {
+                JOptionPane.showMessageDialog(TelaAtualizar.this, "Produto atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                // tenta atualizar a tabela na tela principal imediatamente
+                java.awt.Window w = SwingUtilities.getWindowAncestor(TelaAtualizar.this);
+                if (w instanceof MainFrame) {
+                    ((MainFrame) w).atualizarLista();
+                }
+
+                txtCodigo.setText("");
+                txtNome.setText("");
+                txtDescricao.setText("");
+                txtPreco.setText("");
+                txtQuantidade.setText("");
+            } else {
+                JOptionPane.showMessageDialog(TelaAtualizar.this, "Falha ao atualizar produto.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         // Montagem final
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    // preenche os campos desta tela com os dados do produto (pode ser null)
+    public void carregarProduto(Produto p) {
+        if (p == null) return;
+        txtCodigo.setText(String.valueOf(p.getId()));
+        txtNome.setText(p.getNome());
+        txtDescricao.setText(p.getDescricao());
+        txtPreco.setText(String.valueOf(p.getPreco()));
+        txtQuantidade.setText(String.valueOf(p.getQuantidade()));
     }
 }

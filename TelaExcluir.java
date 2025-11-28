@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class TelaExcluir extends JPanel {
@@ -50,6 +51,41 @@ public class TelaExcluir extends JPanel {
         btnExcluir.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         buttonPanel.add(btnExcluir);
+
+        // ação do botão Excluir
+        btnExcluir.addActionListener(e -> {
+            String sCodigo = campoCodigo.getText().trim();
+            if (sCodigo.isEmpty()) {
+                JOptionPane.showMessageDialog(TelaExcluir.this, "Informe o código do produto.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int codigo;
+            try {
+                codigo = Integer.parseInt(sCodigo);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(TelaExcluir.this, "Código inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int confirmar = JOptionPane.showConfirmDialog(TelaExcluir.this, "Confirma exclusão do produto de código " + codigo + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (confirmar != JOptionPane.YES_OPTION) return;
+
+            boolean ok = Produto.remover(codigo);
+            if (ok) {
+                JOptionPane.showMessageDialog(TelaExcluir.this, "Produto excluído com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                // atualizar lista se possível
+                java.awt.Window w = SwingUtilities.getWindowAncestor(TelaExcluir.this);
+                if (w instanceof MainFrame) {
+                    ((MainFrame) w).atualizarLista();
+                }
+
+                campoCodigo.setText("");
+            } else {
+                JOptionPane.showMessageDialog(TelaExcluir.this, "Produto não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+        });
 
         // Montagem final
         add(formPanel, BorderLayout.CENTER);

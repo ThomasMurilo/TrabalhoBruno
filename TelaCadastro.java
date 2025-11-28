@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class TelaCadastro extends JPanel {
@@ -85,6 +86,53 @@ public class TelaCadastro extends JPanel {
 
         // borda preta de 2px
         btnSalvar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+        // ação do botão Salvar: cria Produto e adiciona ao repositório em memória
+        btnSalvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nome = txtNome.getText().trim();
+                String descricao = txtDescricao.getText().trim();
+                String sPreco = txtPreco.getText().trim();
+                String sQtd = txtQuantidade.getText().trim();
+
+                // sem validações: aceita nome vazio e tenta parse dos números, em erro usa 0
+                double preco = 0.0;
+                int quantidade = 0;
+                if (!sPreco.isEmpty()) {
+                    String precoStr = sPreco.replace("R$", "").replace("r$", "").replaceAll("\\s+", "");
+                    try {
+                        preco = Double.parseDouble(precoStr.replace(',', '.'));
+                    } catch (NumberFormatException ex2) {
+                        try {
+                            String alt = precoStr.replace(".", "").replace(',', '.');
+                            preco = Double.parseDouble(alt);
+                        } catch (NumberFormatException ex3) {
+                            preco = 0.0;
+                        }
+                    }
+                }
+
+                if (!sQtd.isEmpty()) {
+                    try {
+                        quantidade = Integer.parseInt(sQtd);
+                    } catch (NumberFormatException ex) {
+                        quantidade = 0;
+                    }
+                }
+
+                Produto p = new Produto(nome, descricao, preco, quantidade);
+                Produto.adicionar(p);
+
+                JOptionPane.showMessageDialog(TelaCadastro.this, "Produto salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                // limpa campos
+                txtNome.setText("");
+                txtDescricao.setText("");
+                txtPreco.setText("");
+                txtQuantidade.setText("");
+            }
+        });
 
         buttonPanel.add(btnSalvar);
 
