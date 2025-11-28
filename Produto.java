@@ -19,7 +19,7 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    // construtor usado internamente para preservar o id ao atualizar
+    // construtor
     private Produto(int id, String nome, String descricao, double preco, int quantidade) {
         this.id = id;
         this.nome = nome;
@@ -52,7 +52,7 @@ public class Produto {
         produtos.add(p);
     }
 
-    public static synchronized boolean atualizar(int id, String nome, String descricao, double preco, int quantidade) {
+    public static synchronized boolean atualizar(int id, String nome, String descricao, double preco, int quantidade) { // atualizar
         for (int i = 0; i < produtos.size(); i++) {
             Produto atual = produtos.get(i);
             if (atual.id == id) {
@@ -63,7 +63,7 @@ public class Produto {
         return false;
     }
 
-    public static synchronized boolean remover(int id) {
+    public static synchronized boolean remover(int id) { // excluir
         for (int i = 0; i < produtos.size(); i++) {
             if (produtos.get(i).id == id) {
                 produtos.remove(i);
@@ -73,7 +73,7 @@ public class Produto {
         return false;
     }
 
-    public static synchronized Produto buscarPorId(int id) {
+    public static synchronized Produto buscarPorId(int id) { // Busca o produto pelo ID
         for (Produto p : produtos) {
             if (p.id == id) return p;
         }

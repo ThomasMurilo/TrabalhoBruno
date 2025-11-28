@@ -16,13 +16,13 @@ public class TelaListar extends JPanel {
         setLayout(new BorderLayout());
         setBackground(new Color(133, 138, 142)); // fundo cinza
 
-        // -------- TÍTULO DESTACADO --------
+        // título
         JLabel titulo = new JLabel("LISTA DE PRODUTOS", SwingConstants.CENTER);
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 26));
         titulo.setForeground(Color.BLACK);
         titulo.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
-        // -------- TABELA --------
+        // tabela
         String[] colunas = { "Código", "Nome", "Descrição", "Preço", "Quantidade", "Ferramentas" };
 
         DefaultTableModel model = new DefaultTableModel(colunas, 0) {
@@ -42,7 +42,7 @@ public class TelaListar extends JPanel {
         // Borda preta nas células
         tabela.setGridColor(Color.BLACK);
 
-        // Cabeçalho destacado
+        // Cabeçalho 
         JTableHeader header = tabela.getTableHeader();
         header.setFont(new Font("Segoe UI", Font.BOLD, 18));
         header.setBackground(new Color(200, 200, 200));
@@ -57,14 +57,14 @@ public class TelaListar extends JPanel {
         JScrollPane scroll = new JScrollPane(tabela);
         scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
-        // popula tabela com os produtos existentes
+        // adiciona os produtos na tabela
         try {
             atualizarTabela();
         } catch (Exception ex) {
-            // silencioso: se não houver Produto ainda
+            // se não houver Produto ainda
         }
 
-        // painel de botões (Atualizar)
+        // painel de botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         painelBotoes.setBackground(new Color(133, 138, 142));
 
@@ -74,17 +74,17 @@ public class TelaListar extends JPanel {
         painelBotoes.add(btnRefresh);
         btnRefresh.addActionListener(ev -> atualizarTabela());
 
-        // -------- MONTAGEM --------
+        // montagem da tabela
         add(titulo, BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
         add(painelBotoes, BorderLayout.SOUTH);
 
-        // adiciona coluna com botões (Editar / Excluir) renderizados por célula
+        // adiciona coluna com botões
         tabela.getColumn("Ferramentas").setCellRenderer(new ButtonRenderer());
         tabela.getColumn("Ferramentas").setCellEditor(new ButtonEditor(new JCheckBox()));
     }
 
-    // Renderer para os botões na célula (painel com dois botões)
+    // Rederiza os botões na célula 
     private class ButtonRenderer extends JPanel implements javax.swing.table.TableCellRenderer {
         private final JButton btnEditar = new JButton("Editar");
         private final JButton btnExcluir = new JButton("Excluir");
@@ -109,7 +109,7 @@ public class TelaListar extends JPanel {
         }
     }
 
-    // Editor que contém os dois botões e lida com os cliques
+    // Editor dos dois botões e lida com os cliques
     private class ButtonEditor extends javax.swing.AbstractCellEditor implements javax.swing.table.TableCellEditor, java.awt.event.ActionListener {
         private final JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 0));
         private final JButton btnEditar = new JButton("Editar");
@@ -189,7 +189,7 @@ public class TelaListar extends JPanel {
         }
     }
 
-    // método público para atualizar a tabela quando necessário
+    // atualiza a tabela
     public void atualizarTabela() {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setRowCount(0);

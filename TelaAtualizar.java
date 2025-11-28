@@ -109,7 +109,7 @@ public class TelaAtualizar extends JPanel {
 
         buttonPanel.add(btnAtualizar);
 
-        // ação do botão Atualizar: busca por código e atualiza os campos informados (sem validar com diálogos)
+        //  busca por código e atualiza os campos informados (sem validar com diálogos)
         btnAtualizar.addActionListener(e -> {
             String sCodigo = txtCodigo.getText().trim();
             String nome = txtNome.getText().trim();
@@ -121,13 +121,13 @@ public class TelaAtualizar extends JPanel {
             try {
                 codigo = Integer.parseInt(sCodigo);
             } catch (NumberFormatException ex) {
-                // sem diálogo: código inválido -> não prossegue
+                //  código inválido -> não prossegue
                 return;
             }
 
             double preco = 0.0;
             int quantidade = 0;
-            if (!sPreco.isEmpty()) {
+            if (!sPreco.isEmpty()) { // formata o preço
                 String precoStr = sPreco.replace("R$", "").replace("r$", "").replaceAll("\\s+", "");
                 try {
                     preco = Double.parseDouble(precoStr.replace(',', '.'));
@@ -141,7 +141,7 @@ public class TelaAtualizar extends JPanel {
                 }
             }
 
-            if (!sQtd.isEmpty()) {
+            if (!sQtd.isEmpty()) { // verifica se estiver vazio, se sim, define para 0
                 try {
                     quantidade = Integer.parseInt(sQtd);
                 } catch (NumberFormatException ex) {
@@ -151,7 +151,7 @@ public class TelaAtualizar extends JPanel {
 
             Produto existente = Produto.buscarPorId(codigo);
             if (existente == null) {
-                // sem diálogo: produto não encontrado -> não prossegue
+                // produto não encontrado -> não prossegue
                 return;
             }
 
@@ -186,7 +186,7 @@ public class TelaAtualizar extends JPanel {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    // preenche os campos desta tela com os dados do produto (pode ser null)
+    // preenche os campos desta tela com os dados do produto
     public void carregarProduto(Produto p) {
         if (p == null) return;
         txtCodigo.setText(String.valueOf(p.getId()));

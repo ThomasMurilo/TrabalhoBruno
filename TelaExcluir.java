@@ -52,7 +52,7 @@ public class TelaExcluir extends JPanel {
 
         buttonPanel.add(btnExcluir);
 
-        // ação do botão Excluir
+        // botão Excluir
         btnExcluir.addActionListener(e -> {
             String sCodigo = campoCodigo.getText().trim();
             if (sCodigo.isEmpty()) {

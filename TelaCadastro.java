@@ -87,7 +87,7 @@ public class TelaCadastro extends JPanel {
         // borda preta de 2px
         btnSalvar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
-        // ação do botão Salvar: cria Produto e adiciona ao repositório em memória
+        //  cria Produto e adiciona ao repositório em memória
         btnSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,7 +96,7 @@ public class TelaCadastro extends JPanel {
                 String sPreco = txtPreco.getText().trim();
                 String sQtd = txtQuantidade.getText().trim();
 
-                // sem validações: aceita nome vazio e tenta parse dos números, em erro usa 0
+                // aceita nome vazio e tenta parse dos números, em erro usa 0
                 double preco = 0.0;
                 int quantidade = 0;
                 if (!sPreco.isEmpty()) {
