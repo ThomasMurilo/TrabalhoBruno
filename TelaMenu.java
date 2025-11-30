@@ -10,7 +10,7 @@ public class TelaMenu extends JPanel {
         setLayout(new BorderLayout());
 
         // Carrega a imagem
-        ImageIcon icon = new ImageIcon("logo.jfif");
+        ImageIcon icon = new ImageIcon("logo.png");
         imagemOriginal = icon.getImage();
 
         // Painel que redesenha a imagem responsivamente

@@ -78,8 +78,8 @@ public class TelaExcluir extends JPanel {
                 // atualizar lista se possível
                 java.awt.Window w = SwingUtilities.getWindowAncestor(TelaExcluir.this);
                 if (w instanceof MainFrame) {
-                    ((MainFrame) w).atualizarLista();
-                }
+                ((MainFrame) w).atualizarLista();
+}
 
                 campoCodigo.setText("");
             } else {

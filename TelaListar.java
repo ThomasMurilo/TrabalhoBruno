@@ -15,7 +15,7 @@ public class TelaListar extends JPanel {
 
         setLayout(new BorderLayout());
         setBackground(new Color(133, 138, 142)); // fundo cinza
-
+        
         // título
         JLabel titulo = new JLabel("LISTA DE PRODUTOS", SwingConstants.CENTER);
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 26));
