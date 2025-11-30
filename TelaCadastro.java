@@ -93,35 +93,66 @@ public class TelaCadastro extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String nome = txtNome.getText().trim();
                 String descricao = txtDescricao.getText().trim();
-                String sPreco = txtPreco.getText().trim();
-                String sQtd = txtQuantidade.getText().trim();
+                double preco;
+                int qtd;
 
                 // aceita nome vazio e tenta parse dos números, em erro usa 0
-                double preco = 0.0;
+                if(nome.isEmpty() || descricao.isEmpty() || txtPreco.getText().isEmpty() || txtQuantidade.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (nome.length() < 3){
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "O nome do produto deve ter pelo menos 3 caracteres.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (descricao.equals(nome)) {
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "Por favor, descreva o produto com mais detalhes.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (descricao.length() < 10){
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "A descrição do produto deve ter pelo menos 10 caracteres.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try {
+                    preco = Double.parseDouble(txtPreco.getText().trim());
+                    qtd = Integer.parseInt(txtQuantidade.getText().trim());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(TelaCadastro.this,
+                        "Preço e quantidade devem ser números válidos.",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (qtd <= 0){
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "A quantidade deve ser maior que zero.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (preco <= 0){
+                    JOptionPane.showMessageDialog(TelaCadastro.this, "O preço deve ser maior que zero.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+
+                /* NÃO ESTAMOS USANDO ESSE CÓDIGO DE TRATAMENTO DE PREÇO POR ENQUANTO
+                double preco2 = 0.0;
                 int quantidade = 0;
-                if (!sPreco.isEmpty()) {
-                    String precoStr = sPreco.replace("R$", "").replace("r$", "").replaceAll("\\s+", "");
+                if (!preco.isEmpty()) {
+                    String precoStr = preco.replace("R$", "").replace("r$", "").replaceAll("\\s+", "");
                     try {
-                        preco = Double.parseDouble(precoStr.replace(',', '.'));
+                        preco2 = Double.parseDouble(precoStr.replace(',', '.'));
                     } catch (NumberFormatException ex2) {
                         try {
                             String alt = precoStr.replace(".", "").replace(',', '.');
-                            preco = Double.parseDouble(alt);
+                            preco2 = Double.parseDouble(alt);
                         } catch (NumberFormatException ex3) {
-                            preco = 0.0;
+                            preco2 = 0.0;
                         }
                     }
                 }
+                */
 
-                if (!sQtd.isEmpty()) {
-                    try {
-                        quantidade = Integer.parseInt(sQtd);
-                    } catch (NumberFormatException ex) {
-                        quantidade = 0;
-                    }
-                }
-
-                Produto p = new Produto(nome, descricao, preco, quantidade);
+                Produto p = new Produto(nome, descricao, preco, qtd);
                 Produto.adicionar(p);
 
                 JOptionPane.showMessageDialog(TelaCadastro.this, "Produto salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -157,6 +188,6 @@ public class TelaCadastro extends JPanel {
         txtDescricao.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         txtPreco.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         txtQuantidade.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
+    
     }
 }
