@@ -148,6 +148,7 @@ public class TelaAtualizar extends JPanel {
                     quantidade = 0;
                 }
             }
+            
 
             Produto existente = Produto.buscarPorId(codigo);
             if (existente == null) {
