@@ -125,7 +125,6 @@ public class TelaAtualizar extends JPanel {
                 return;
             }
 
-            
             double preco = 0.0;
             int quantidade = 0;
             if (!sPreco.isEmpty()) { // formata o preço
